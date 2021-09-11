@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+
+<body>
+    <h2>Welcome to Django!!!</h2>
+    <form method="POST" action=".">
+        {% csrf_token %}
+        <label for="qs">Enter Question</label><br>
+        <input type="text" id="fname" name="qs"><br>
+        <div class="row justify-content-between">
+            <div class="col-md-12 col-sm-12 option" id="choices">
+                <div>
+                    <div class="wrapper form-controls" style="margin-bottom: 10px;" class="questionbit mb-2">
+                        <div class="row justify-content-between p-2">
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <div id="Options">
+                                    <label class="form-label" for="question">Choices Option </label>
+
+                                    <input type="text" name="Options[]" id="question" class="form-control Options"
+                                        placeholder="Enter option">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-group d-flex align-items-center pt-2 ">
+
+                                <button type="button" id="add_fields" class=" btn btn-default btn btn-primary"
+                                    style="margin-right: 2%;">Add</button>
+                                <button type="button" id="remove_fields"
+                                    class=" btn btn-default btn btn-primary">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class=" btn btn-default btn btn-primary">Submit</button>
+    </form>
+
+    <h1>Fetching section</h1>
+    {% for all in all%}
+    
+    
+            
+           <h4> {{all.question}}</h4>
+            
+       
+            
+       
+       
+                   
+         
+                   {% for op in all.options  %}
+                  
+                   
+                   
+                     <input type="checkbox"> {{ op}}
+
+                     
+                    
+                    {% endfor %}
+                {% endfor %}
+</body>
+<script>
+    var Options = document.getElementById('Options')
+    var add_fields = document.getElementById('add_fields')
+    var remove_fields = document.getElementById('remove_fields')
+
+
+    add_fields.onclick = function () {
+        var newfield = document.createElement('input');
+
+        newfield.setAttribute('type', 'text');
+        newfield.setAttribute('name', 'Options[]');
+        newfield.setAttribute('class', 'form-control Options');
+        newfield.setAttribute('id', 'question');
+        newfield.setAttribute('placeholder', 'add option');
+        newfield.setAttribute('style', 'margin-bottom: 1%;');
+        Options.appendChild(newfield);
+
+
+    }
+
+    remove_fields.onclick = function () {
+        var input_tags = Options.getElementsByTagName('input');
+
+        if (input_tags.length > 1) {
+            Options.removeChild(input_tags[(input_tags.length) - 1]);
+        }
+    }
+
+
+
+</script>
+
+</html>
